@@ -3,6 +3,7 @@ package com.gymmanagement.gym_management.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.gymmanagement.gym_management.dtos.UserRequestDTO;
@@ -16,6 +17,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepo userRepo;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public UserResponseDTO createUser(UserRequestDTO dto) {
        
@@ -25,7 +29,7 @@ public class UserServiceImpl implements UserService {
          User user = new User();
          user.setName(dto.getName());
          user.setEmail(dto.getEmail());
-         user.setPassword(dto.getPassword());
+         user.setPassword(passwordEncoder.encode(dto.getPassword()));
          user.setRole(dto.getRole());
 
          User savedUser = userRepo.save(user);

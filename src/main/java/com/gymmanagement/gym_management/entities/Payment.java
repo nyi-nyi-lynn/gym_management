@@ -1,9 +1,7 @@
 package com.gymmanagement.gym_management.entities;
 
 import java.time.LocalDate;
-import java.util.concurrent.Flow.Subscription;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

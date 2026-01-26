@@ -4,7 +4,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gymmanagement.gym_management.dtos.SubscribeRequestDTO;
-import com.gymmanagement.gym_management.entities.MemberSubscription;
 import com.gymmanagement.gym_management.services.MemberSubscriptionService;
 
 import jakarta.validation.Valid;
