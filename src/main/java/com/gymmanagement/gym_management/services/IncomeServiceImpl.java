@@ -24,4 +24,9 @@ public class IncomeServiceImpl implements IncomeService{
         Double total = paymentRepo.getMonthlyIncome(month, year);
         return total != null ? total : 0.0;
     }
+
+    @Override
+    public double getTotalIncome() {
+        return paymentRepo.getTotalIncome();
+    }
 }

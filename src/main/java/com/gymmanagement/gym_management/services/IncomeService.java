@@ -4,4 +4,6 @@ public interface IncomeService {
     double getTodayIncome();
 
     double getMonthlyIncome(int month, int year);
+
+    double getTotalIncome();
 }

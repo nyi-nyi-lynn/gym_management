@@ -25,6 +25,9 @@ public interface PaymentRepo  extends JpaRepository<Payment,Long>{
             """)
     Double getMonthlyIncome (int month,int year);
 
+    @Query("SELECT SUM(p.amount) FROM Payment p")
+    Double getTotalIncome();
+
     //all payments
     List<Payment> findAllByOrderByPaymentDateDesc();
 }
