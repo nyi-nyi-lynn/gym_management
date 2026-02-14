@@ -1,46 +1,77 @@
 package com.gymmanagement.gym_management.services;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.gymmanagement.gym_management.dtos.PaymentRequestDTO;
-import com.gymmanagement.gym_management.entities.MemberSubscription;
+import com.gymmanagement.gym_management.dtos.PaymentRequest;
+import com.gymmanagement.gym_management.entities.Orders;
 import com.gymmanagement.gym_management.entities.Payment;
-import com.gymmanagement.gym_management.entities.User;
-import com.gymmanagement.gym_management.repositories.MemberSubscriptionRepo;
+import com.gymmanagement.gym_management.enums.OrderType;
+import com.gymmanagement.gym_management.enums.PaymentStatus;
+import com.gymmanagement.gym_management.repositories.OrdersRepo;
 import com.gymmanagement.gym_management.repositories.PaymentRepo;
-import com.gymmanagement.gym_management.repositories.UserRepo;
+
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 
 @Service
-public class PaymentServiceImpl  implements PaymentService{
+@RequiredArgsConstructor
+@Transactional
+public class PaymentServiceImpl implements PaymentService {
 
-    @Autowired
-    UserRepo userRepo;
-
-    @Autowired 
-    MemberSubscriptionRepo subscriptionRepo;
-
-    @Autowired
-    PaymentRepo paymentRepo;
+    private final OrdersRepo ordersRepo;
+    private final PaymentRepo paymentRepo;
+    private final CourseEnrollmentService courseEnrollmentService;
+    private final ClassBookingService classBookingService;
+    private final MembershipSubscriptionService membershipSubscriptionService;
 
     @Override
-    public void makePayment(PaymentRequestDTO dto) {
-        User member = userRepo.findById(dto.getMemberId())
-        .orElseThrow(()-> new RuntimeException("Member not Found"));
+    public void processPayment(Long orderId, PaymentRequest req) {
 
-        MemberSubscription subscription = subscriptionRepo.findById(dto.getSubscriptionId())
-        .orElseThrow(()-> new RuntimeException("Subscription not Found"));
+        Orders order = ordersRepo.findById(orderId)
+                .orElseThrow(() -> new RuntimeException("Order not found"));
+
+        if (order.getPaymentStatus() == PaymentStatus.PAID) {
+            throw new RuntimeException("Order already paid");
+        }
 
         Payment payment = new Payment();
-        payment.setMember(member);
-        payment.setSubscription(subscription);
-        payment.setAmount(dto.getAmount());
-        payment.setPaymentDate(LocalDate.now());
-        payment.setPaymentMethod(dto.getPaymentMethod());
-    
+        payment.setOrder(order);
+        payment.setAmount(order.getTotalAmount());
+        payment.setPaymentMethod(req.getPaymentMethod());
+        payment.setTransactionId(req.getTransactionId());
+        payment.setPaymentStatus(PaymentStatus.PAID);
+        payment.setPaymentDate(LocalDateTime.now());
+
         paymentRepo.save(payment);
 
+        order.setPaymentStatus(PaymentStatus.PAID);
+        ordersRepo.save(order);
+
+        if (order.getOrderType() == OrderType.COURSE) {
+            courseEnrollmentService.enrollCourse(order);
+        }
+
+        if (order.getOrderType() == OrderType.CLASS) {
+            classBookingService.book(order);
+        }
+
+        if (order.getOrderType() == OrderType.MEMBERSHIP) {
+            membershipSubscriptionService.subscribe(order);
+        }
+
+        
+    }
+
+    @Override
+    public List<Payment> getPaymentsByOrder(Long orderId) {
+        return paymentRepo.findByOrderId(orderId);
+    }
+
+    @Override
+    public List<Payment> getAllPayments() {
+        return paymentRepo.findAll();
     }
 }

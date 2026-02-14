@@ -2,17 +2,26 @@ package com.gymmanagement.gym_management.services;
 
 import java.util.List;
 
-import com.gymmanagement.gym_management.dtos.UserRequestDTO;
-import com.gymmanagement.gym_management.dtos.UserResponseDTO;
-import com.gymmanagement.gym_management.entities.User;
+import com.gymmanagement.gym_management.dtos.UserCreateRequest;
+import com.gymmanagement.gym_management.dtos.UserResponse;
+import com.gymmanagement.gym_management.dtos.UserUpdateRequest;
 
 
 public interface UserService {
 
-    UserResponseDTO createUser(UserRequestDTO user);
+    UserResponse createUser(UserCreateRequest user);
 
-    List<User> getAllUsers();
+    UserResponse updateUser(Long id, UserUpdateRequest request);
 
-    User getUserById(Long id);
+    List<UserResponse> getAllUsers();
 
+    UserResponse getUserById(Long id);
+
+    void deleteUser(Long id);
+
+    void activateUser(Long id);
+
+    void deactivateUser(Long id);
+
+    void banUser(Long id);
 }

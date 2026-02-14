@@ -1,55 +1,101 @@
 package com.gymmanagement.gym_management.services;
 
-
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.gymmanagement.gym_management.dtos.MembershipPlanRequestDTO;
-import com.gymmanagement.gym_management.dtos.MembershipPlanResponseDTO;
+import com.gymmanagement.gym_management.dtos.MembershipPlanRequest;
+import com.gymmanagement.gym_management.dtos.MembershipPlanResponse;
 import com.gymmanagement.gym_management.entities.MembershipPlan;
+import com.gymmanagement.gym_management.enums.PlanStatus;
 import com.gymmanagement.gym_management.repositories.MembershipPlanRepo;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class MembershipPlanServiceImpl implements MembershipPlanService {
 
-    @Autowired
-    private MembershipPlanRepo membershipPlanRepo;
+    private final MembershipPlanRepo repo;
 
+    // ================================
+    // CREATE
+    // ================================
     @Override
-    public MembershipPlanResponseDTO createPlan(MembershipPlanRequestDTO dto) {
-       MembershipPlan plan = new MembershipPlan();
-       plan.setPlan_name(dto.getPlan_name());
-       plan.setPrice(dto.getPrice());
-       plan.setDurationMonths(dto.getDurationMonths());
+    public MembershipPlanResponse create(MembershipPlanRequest req) {
 
-       MembershipPlan savedPlan = membershipPlanRepo.save(plan);
+        MembershipPlan plan = new MembershipPlan();
+        plan.setName(req.getName());
+        plan.setPrice(req.getPrice());
+        plan.setDurationMonths(req.getDurationMonths());
+        plan.setDescription(req.getDescription());
+        plan.setStatus(PlanStatus.ACTIVE);
 
-       MembershipPlanResponseDTO response = new MembershipPlanResponseDTO();
-       response.setId(savedPlan.getId());
-       response.setPlan_name(savedPlan.getPlan_name());
-       response.setPrice(savedPlan.getPrice());
-       response.setDurationMonths(savedPlan.getDurationMonths());
-       response.setActive(savedPlan.isActive());
+        repo.save(plan);
 
-       return response;
+        return mapToResponse(plan);
     }
 
+    // ================================
+    // UPDATE
+    // ================================
     @Override
-    public List<MembershipPlanResponseDTO> getAllPlans() {;
-       return membershipPlanRepo.findAll()
-       .stream()
-       .map(plan -> {
-              MembershipPlanResponseDTO dto = new MembershipPlanResponseDTO();
-              dto.setId(plan.getId());
-              dto.setPlan_name(plan.getPlan_name());
-              dto.setPrice(plan.getPrice());
-              dto.setDurationMonths(plan.getDurationMonths());
-              dto.setActive(plan.isActive());
-              return dto;
-       }).collect(Collectors.toList());
-        
+    public MembershipPlanResponse update(Long id, MembershipPlanRequest req) {
+
+        MembershipPlan plan = repo.findById(id)
+                .orElseThrow(() -> 
+                    new RuntimeException("Membership Plan not found with id: " + id));
+
+        plan.setName(req.getName());
+        plan.setPrice(req.getPrice());
+        plan.setDurationMonths(req.getDurationMonths());
+        plan.setDescription(req.getDescription());
+
+        repo.save(plan);
+
+        return mapToResponse(plan);
+    }
+
+    // ================================
+    // DELETE
+    // ================================
+    @Override
+    public void delete(Long id) {
+
+        MembershipPlan plan = repo.findById(id)
+                .orElseThrow(() -> 
+                    new RuntimeException("Membership Plan not found with id: " + id));
+
+        repo.delete(plan);
+    }
+
+    // ================================
+    // GET ALL
+    // ================================
+    @Override
+    public List<MembershipPlanResponse> getAll() {
+
+        return repo.findAll()
+                .stream()
+                .map(this::mapToResponse)
+                .collect(Collectors.toList());
+    }
+
+    // ================================
+    // MAPPER
+    // ================================
+    private MembershipPlanResponse mapToResponse(MembershipPlan plan) {
+
+        MembershipPlanResponse res = new MembershipPlanResponse();
+
+        res.setId(plan.getId());
+        res.setName(plan.getName());
+        res.setPrice(plan.getPrice());
+        res.setDurationMonths(plan.getDurationMonths());
+        res.setDescription(plan.getDescription());
+        res.setStatus(plan.getStatus());
+
+        return res;
     }
 }

@@ -1,13 +1,19 @@
 package com.gymmanagement.gym_management.entities;
 
-import java.time.LocalDate;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
+import com.gymmanagement.gym_management.enums.PaymentMethod;
+import com.gymmanagement.gym_management.enums.PaymentStatus;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -15,21 +21,25 @@ import lombok.Data;
 @Table(name = "payments")
 @Data
 public class Payment {
-    @Id
+     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long  id;
+    private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User member;
+    @OneToOne
+    @JoinColumn(name = "order_id")
+    private Orders order;
 
-    @ManyToOne
-    @JoinColumn(name = "subscription_id")
-    private MemberSubscription subscription;
+    private BigDecimal amount;
 
-    private Double amount ;
+    @Enumerated(EnumType.STRING)
+    private PaymentMethod paymentMethod;
 
-    private LocalDate paymentDate;
+    private String transactionId;
 
-    private String paymentMethod;
+    @Enumerated(EnumType.STRING)
+    private PaymentStatus paymentStatus;
+
+    private LocalDateTime paymentDate;
+
+    private String receiptUrl;
 }

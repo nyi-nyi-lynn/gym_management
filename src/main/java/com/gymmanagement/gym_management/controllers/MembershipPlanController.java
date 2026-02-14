@@ -2,38 +2,47 @@ package com.gymmanagement.gym_management.controllers;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import com.gymmanagement.gym_management.dtos.MembershipPlanRequestDTO;
-import com.gymmanagement.gym_management.dtos.MembershipPlanResponseDTO;
+import com.gymmanagement.gym_management.dtos.MembershipPlanRequest;
+import com.gymmanagement.gym_management.dtos.MembershipPlanResponse;
 import com.gymmanagement.gym_management.services.MembershipPlanService;
 
-import jakarta.validation.Valid;
-
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.GetMapping;
-
-
-
+import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api/plans")
+@RequestMapping("/api/membership-plans")
+@RequiredArgsConstructor
 public class MembershipPlanController {
-    @Autowired
-    private MembershipPlanService service;
 
-    @PostMapping
-    public MembershipPlanResponseDTO createPlan(@Valid @RequestBody MembershipPlanRequestDTO dto) {
-        return service.createPlan(dto);
+    private final MembershipPlanService service;
+
+    // ADMIN - CREATE
+    @PostMapping("/admin")
+    public MembershipPlanResponse create(
+            @RequestBody MembershipPlanRequest req) {
+        return service.create(req);
     }
 
+
+    // ADMIN - UPDATE
+    @PutMapping("/admin/{id}")
+    public MembershipPlanResponse update(
+            @PathVariable Long id,
+            @RequestBody MembershipPlanRequest req) {
+        return service.update(id, req);
+    }
+
+
+    // ADMIN - DELETE
+    @DeleteMapping("/admin/{id}")
+    public void delete(@PathVariable Long id) {
+        service.delete(id);
+    }
+
+    // ADMIN / MEMBER - GET ALL
     @GetMapping
-    public List<MembershipPlanResponseDTO> getAllPlan() {
-        return service.getAllPlans();
+    public List<MembershipPlanResponse> getAll() {
+        return service.getAll();
     }
-    
-    
 }
