@@ -55,17 +55,54 @@ DELETE FROM members WHERE id BETWEEN 1 AND 200;
 DELETE FROM trainers WHERE id BETWEEN 1 AND 200;
 DELETE FROM users WHERE id BETWEEN 1 AND 200;
 
+-- Also reset by seed emails in case legacy test data used different IDs.
+DELETE FROM members
+WHERE user_id IN (
+    SELECT id FROM users
+    WHERE email IN (
+        'admin@gym.local',
+        'trainer1@gym.local',
+        'trainer2@gym.local',
+        'member1@gym.local',
+        'member2@gym.local',
+        'member3@gym.local'
+    )
+);
+
+DELETE FROM trainers
+WHERE user_id IN (
+    SELECT id FROM users
+    WHERE email IN (
+        'admin@gym.local',
+        'trainer1@gym.local',
+        'trainer2@gym.local',
+        'member1@gym.local',
+        'member2@gym.local',
+        'member3@gym.local'
+    )
+);
+
+DELETE FROM users
+WHERE email IN (
+    'admin@gym.local',
+    'trainer1@gym.local',
+    'trainer2@gym.local',
+    'member1@gym.local',
+    'member2@gym.local',
+    'member3@gym.local'
+);
+
 -- Seed users (password for all users: password)
--- BCrypt hash: $2a$10$7EqJtq98hPqEX7fNZaFWoOHi5YVfM9vDOMkMt2rt7NmBGG99HCa9W
+-- Stored as {noop}password for deterministic local login.
 INSERT INTO users (
     id, name, email, password, phone_number, address, gender, date_of_birth, role, status, created_at, updated_at
 ) VALUES
-    (1,  'System Admin', 'admin@gym.local',    '$2a$10$7EqJtq98hPqEX7fNZaFWoOHi5YVfM9vDOMkMt2rt7NmBGG99HCa9W', '0910000001', 'Yangon',    'MALE',   '1990-01-01', 'ADMIN',   'ACTIVE', NOW(), NOW()),
-    (2,  'Trainer One',  'trainer1@gym.local', '$2a$10$7EqJtq98hPqEX7fNZaFWoOHi5YVfM9vDOMkMt2rt7NmBGG99HCa9W', '0910000002', 'Yangon',    'FEMALE', '1992-03-15', 'TRAINER', 'ACTIVE', NOW(), NOW()),
-    (3,  'Trainer Two',  'trainer2@gym.local', '$2a$10$7EqJtq98hPqEX7fNZaFWoOHi5YVfM9vDOMkMt2rt7NmBGG99HCa9W', '0910000003', 'Mandalay',  'MALE',   '1991-07-21', 'TRAINER', 'ACTIVE', NOW(), NOW()),
-    (10, 'Member One',   'member1@gym.local',  '$2a$10$7EqJtq98hPqEX7fNZaFWoOHi5YVfM9vDOMkMt2rt7NmBGG99HCa9W', '0910000010', 'Yangon',    'MALE',   '2000-05-10', 'MEMBER',  'ACTIVE', NOW(), NOW()),
-    (11, 'Member Two',   'member2@gym.local',  '$2a$10$7EqJtq98hPqEX7fNZaFWoOHi5YVfM9vDOMkMt2rt7NmBGG99HCa9W', '0910000011', 'Bago',      'FEMALE', '1999-09-09', 'MEMBER',  'ACTIVE', NOW(), NOW()),
-    (12, 'Member Three', 'member3@gym.local',  '$2a$10$7EqJtq98hPqEX7fNZaFWoOHi5YVfM9vDOMkMt2rt7NmBGG99HCa9W', '0910000012', 'Naypyitaw', 'OTHER',  '2001-12-20', 'MEMBER',  'ACTIVE', NOW(), NOW());
+    (1,  'System Admin', 'admin@gym.local',    '{noop}password', '0910000001', 'Yangon',    'MALE',   '1990-01-01', 'ADMIN',   'ACTIVE', NOW(), NOW()),
+    (2,  'Trainer One',  'trainer1@gym.local', '{noop}password', '0910000002', 'Yangon',    'FEMALE', '1992-03-15', 'TRAINER', 'ACTIVE', NOW(), NOW()),
+    (3,  'Trainer Two',  'trainer2@gym.local', '{noop}password', '0910000003', 'Mandalay',  'MALE',   '1991-07-21', 'TRAINER', 'ACTIVE', NOW(), NOW()),
+    (10, 'Member One',   'member1@gym.local',  '{noop}password', '0910000010', 'Yangon',    'MALE',   '2000-05-10', 'MEMBER',  'ACTIVE', NOW(), NOW()),
+    (11, 'Member Two',   'member2@gym.local',  '{noop}password', '0910000011', 'Bago',      'FEMALE', '1999-09-09', 'MEMBER',  'ACTIVE', NOW(), NOW()),
+    (12, 'Member Three', 'member3@gym.local',  '{noop}password', '0910000012', 'Naypyitaw', 'OTHER',  '2001-12-20', 'MEMBER',  'ACTIVE', NOW(), NOW());
 
 INSERT INTO trainers (
     id, user_id, specialization, experience_years, bio, status, start_work_date, profile_completed
@@ -126,3 +163,7 @@ INSERT INTO payments (
     (3, 3,  8000.00, 'CASH',    'TXN-SEED-0003', 'PAID', NOW(), NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;
+
+
+
+
