@@ -1,6 +1,7 @@
 package com.gymmanagement.gym_management.controllers;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,12 +14,13 @@ import com.gymmanagement.gym_management.services.PaymentService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api/payments")
+@RequestMapping("/api/orders/{orderId}/payments")
 @RequiredArgsConstructor
 public class PaymentController {
   private final PaymentService paymentService;
 
-    @PostMapping("/{orderId}")
+    @PostMapping
+    @PreAuthorize("hasRole('MEMBER')")
     public ResponseEntity<?> pay(
             @PathVariable Long orderId,
             @RequestBody PaymentRequest req){

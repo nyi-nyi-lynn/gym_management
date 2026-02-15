@@ -3,10 +3,10 @@ package com.gymmanagement.gym_management.services;
 import java.util.List;
 
 import com.gymmanagement.gym_management.dtos.ClassBookingResponse;
-import com.gymmanagement.gym_management.entities.Orders;
+import com.gymmanagement.gym_management.entities.Order;
 
 public interface ClassBookingService {
-     ClassBookingResponse book(Orders order);
+     ClassBookingResponse book(Order order);
 
     void cancel(Long bookingId, Long memberId);
 

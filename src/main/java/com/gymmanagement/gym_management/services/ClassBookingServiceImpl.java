@@ -9,7 +9,7 @@ import com.gymmanagement.gym_management.dtos.ClassBookingResponse;
 import com.gymmanagement.gym_management.entities.ClassBooking;
 import com.gymmanagement.gym_management.entities.ClassEntity;
 import com.gymmanagement.gym_management.entities.Member;
-import com.gymmanagement.gym_management.entities.Orders;
+import com.gymmanagement.gym_management.entities.Order;
 import com.gymmanagement.gym_management.enums.BookingStatus;
 import com.gymmanagement.gym_management.enums.ClassStatus;
 import com.gymmanagement.gym_management.enums.PaymentStatus;
@@ -30,7 +30,7 @@ public class ClassBookingServiceImpl implements ClassBookingService{
     // 1️ BOOK CLASS
     // ========================================
     @Override
-    public ClassBookingResponse book(Orders order) {
+    public ClassBookingResponse book(Order order) {
 
 
         if (!order.getPaymentStatus().equals(PaymentStatus.PAID)) {

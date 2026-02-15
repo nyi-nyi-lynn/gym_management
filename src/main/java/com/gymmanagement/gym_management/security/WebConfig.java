@@ -2,7 +2,6 @@ package com.gymmanagement.gym_management.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -10,20 +9,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebConfig {
 
     @Bean
-    public WebMvcConfigurer corsConfigurer() {
+    public WebMvcConfigurer webConfigurer() {
         return new WebMvcConfigurer() {
             @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/api/**") // API path အားလုံးအတွက်
-                        .allowedOrigins("http://localhost:5173") // React application ရဲ့ origin
-                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // ခွင့်ပြုမယ့် method များ
-                        .allowedHeaders("*")
-                        .allowCredentials(true);
-            }
-
-            @Override
             public void addResourceHandlers(ResourceHandlerRegistry registry) {
-
                 registry.addResourceHandler("/uploads/**")
                         .addResourceLocations("file:uploads/");
             }

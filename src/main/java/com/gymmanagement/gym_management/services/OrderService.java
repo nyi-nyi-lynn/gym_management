@@ -3,14 +3,14 @@ package com.gymmanagement.gym_management.services;
 import java.util.List;
 
 import com.gymmanagement.gym_management.dtos.OrderCreateRequest;
-import com.gymmanagement.gym_management.entities.Orders;
+import com.gymmanagement.gym_management.entities.Order;
 
 public interface OrderService {
-    Orders createOrder(OrderCreateRequest request, Long userId);
+    Order createOrder(OrderCreateRequest request, Long userId);
 
-    List<Orders> getMyOrders(Long userId);
+    List<Order> getMyOrders(Long userId);
 
-    List<Orders> getAllOrders();
+    List<Order> getAllOrders();
 
-    Orders getById(Long id);
+    Order getById(Long id);
 }

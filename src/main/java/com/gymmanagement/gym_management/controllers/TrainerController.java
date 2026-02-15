@@ -1,15 +1,17 @@
 package com.gymmanagement.gym_management.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gymmanagement.gym_management.dtos.TrainerProfileRequest;
 import com.gymmanagement.gym_management.dtos.TrainerResponse;
+import com.gymmanagement.gym_management.security.CustomUserDetails;
 import com.gymmanagement.gym_management.services.TrainerService;
 
 @RestController
@@ -19,15 +21,18 @@ public class TrainerController {
     private TrainerService  trainerService;
 
        // Trainer self
-    @PutMapping("/profile")
+    @PutMapping("/me/profile")
+    @PreAuthorize("hasRole('TRAINER')")
     public TrainerResponse completeProfile(
-            @RequestParam Long userId,
+            @AuthenticationPrincipal CustomUserDetails userDetails,
             @RequestBody TrainerProfileRequest request) {
-        return trainerService.completeProfile(userId, request);
+        return trainerService.completeProfile(userDetails.getId(), request);
     }
 
     @GetMapping("/me")
-    public TrainerResponse getMyProfile(@RequestParam Long userId) {
-        return trainerService.getTrainerByUserId(userId);
+    @PreAuthorize("hasRole('TRAINER')")
+    public TrainerResponse getMyProfile(
+            @AuthenticationPrincipal CustomUserDetails userDetails) {
+        return trainerService.getTrainerByUserId(userDetails.getId());
     }
 }

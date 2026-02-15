@@ -1,6 +1,7 @@
 package com.gymmanagement.gym_management.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,7 +18,8 @@ public class FileController {
     @Autowired
     private FileStorageService service;
 
-     @PostMapping("/upload")
+     @PostMapping
+    @PreAuthorize("hasAnyRole('ADMIN','TRAINER','MEMBER')")
     public FileUploadResponse upload(
             @RequestParam("file") MultipartFile file,
             @RequestParam("type") FileType type) {

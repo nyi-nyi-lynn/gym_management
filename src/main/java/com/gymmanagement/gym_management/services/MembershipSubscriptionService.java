@@ -4,11 +4,11 @@ import java.util.List;
 
 
 import com.gymmanagement.gym_management.dtos.MembershipSubscriptionResponse;
-import com.gymmanagement.gym_management.entities.Orders;
+import com.gymmanagement.gym_management.entities.Order;
 import com.gymmanagement.gym_management.enums.SubscriptionStatus;
 
 public interface MembershipSubscriptionService {
-    MembershipSubscriptionResponse subscribe(Orders order);
+    MembershipSubscriptionResponse subscribe(Order order);
 
     List<MembershipSubscriptionResponse> 
             getMemberSubscriptions(Long memberId);

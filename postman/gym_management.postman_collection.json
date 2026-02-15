@@ -1,0 +1,263 @@
+{
+  "info": {
+    "_postman_id": "6db2bb3d-7a9e-4dcf-a432-fdc7f2805542",
+    "name": "Gym Management API",
+    "description": "Complete route coverage by controller, organized version-first.",
+    "version": {
+      "major": 1,
+      "minor": 2,
+      "patch": 0
+    },
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080" },
+    { "key": "token", "value": "" },
+    { "key": "id", "value": "1" },
+    { "key": "userId", "value": "10" },
+    { "key": "memberId", "value": "1" },
+    { "key": "trainerUserId", "value": "2" },
+    { "key": "categoryId", "value": "1" },
+    { "key": "courseId", "value": "1" },
+    { "key": "classId", "value": "1" },
+    { "key": "bookingId", "value": "1" },
+    { "key": "orderId", "value": "1" },
+    { "key": "planId", "value": "1" },
+    { "key": "scheduleId", "value": "1" },
+    { "key": "assignmentId", "value": "1" },
+    { "key": "notificationId", "value": "1" },
+    { "key": "subscriptionId", "value": "1" },
+    { "key": "attendanceId", "value": "1" }
+  ],
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "AuthController",
+          "item": [
+            {
+              "name": "POST /api/auth/login",
+              "request": {
+                "auth": { "type": "noauth" },
+                "method": "POST",
+                "header": [{ "key": "Content-Type", "value": "application/json" }],
+                "body": { "mode": "raw", "raw": "{\n  \"email\": \"admin@gym.local\",\n  \"password\": \"password\"\n}" },
+                "url": "{{baseUrl}}/api/auth/login"
+              }
+            },
+            {
+              "name": "POST /api/auth/register/member",
+              "request": {
+                "auth": { "type": "noauth" },
+                "method": "POST",
+                "header": [{ "key": "Content-Type", "value": "application/json" }],
+                "body": { "mode": "raw", "raw": "{}" },
+                "url": "{{baseUrl}}/api/auth/register/member"
+              }
+            },
+            {
+              "name": "POST /api/auth/register/trainer",
+              "request": {
+                "auth": { "type": "noauth" },
+                "method": "POST",
+                "header": [{ "key": "Content-Type", "value": "application/json" }],
+                "body": { "mode": "raw", "raw": "{}" },
+                "url": "{{baseUrl}}/api/auth/register/trainer"
+              }
+            }
+          ]
+        },
+        {
+          "name": "UserController",
+          "item": [
+            { "name": "POST /api/users", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{}" }, "url": "{{baseUrl}}/api/users" } },
+            { "name": "PUT /api/users/{id}", "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{}" }, "url": "{{baseUrl}}/api/users/{{id}}" } },
+            { "name": "GET /api/users/{id}", "request": { "method": "GET", "url": "{{baseUrl}}/api/users/{{id}}" } },
+            { "name": "GET /api/users", "request": { "method": "GET", "url": "{{baseUrl}}/api/users" } },
+            { "name": "DELETE /api/users/{id}", "request": { "method": "DELETE", "url": "{{baseUrl}}/api/users/{{id}}" } },
+            { "name": "PUT /api/users/{id}/activate", "request": { "method": "PUT", "url": "{{baseUrl}}/api/users/{{id}}/activate" } },
+            { "name": "PUT /api/users/{id}/deactivate", "request": { "method": "PUT", "url": "{{baseUrl}}/api/users/{{id}}/deactivate" } },
+            { "name": "PUT /api/users/{id}/suspended", "request": { "method": "PUT", "url": "{{baseUrl}}/api/users/{{id}}/suspended" } },
+            { "name": "PATCH /api/users/{id}/status", "request": { "method": "PATCH", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{}" }, "url": "{{baseUrl}}/api/users/{{id}}/status" } }
+          ]
+        },
+        {
+          "name": "MemberController",
+          "item": [
+            { "name": "PUT /api/members/me/profile", "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{}" }, "url": "{{baseUrl}}/api/members/me/profile" } },
+            { "name": "GET /api/members/me", "request": { "method": "GET", "url": "{{baseUrl}}/api/members/me" } }
+          ]
+        },
+        {
+          "name": "TrainerController",
+          "item": [
+            { "name": "PUT /api/trainers/me/profile", "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{}" }, "url": "{{baseUrl}}/api/trainers/me/profile" } },
+            { "name": "GET /api/trainers/me", "request": { "method": "GET", "url": "{{baseUrl}}/api/trainers/me" } }
+          ]
+        },
+        {
+          "name": "CategoryController",
+          "item": [
+            { "name": "GET /api/categories", "request": { "method": "GET", "url": "{{baseUrl}}/api/categories" } },
+            { "name": "GET /api/categories/manage", "request": { "method": "GET", "url": "{{baseUrl}}/api/categories/manage" } },
+            { "name": "POST /api/categories", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{}" }, "url": "{{baseUrl}}/api/categories" } },
+            { "name": "PUT /api/categories/{id}", "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{}" }, "url": "{{baseUrl}}/api/categories/{{id}}" } }
+          ]
+        },
+        {
+          "name": "MembershipPlanController",
+          "item": [
+            { "name": "POST /api/membership-plans", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{}" }, "url": "{{baseUrl}}/api/membership-plans" } },
+            { "name": "PUT /api/membership-plans/{id}", "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{}" }, "url": "{{baseUrl}}/api/membership-plans/{{id}}" } },
+            { "name": "DELETE /api/membership-plans/{id}", "request": { "method": "DELETE", "url": "{{baseUrl}}/api/membership-plans/{{id}}" } },
+            { "name": "GET /api/membership-plans", "request": { "method": "GET", "url": "{{baseUrl}}/api/membership-plans" } }
+          ]
+        },
+        {
+          "name": "MembershipSubscriptionController",
+          "item": [
+            { "name": "GET /api/membership-subscriptions/members/{memberId}", "request": { "method": "GET", "url": "{{baseUrl}}/api/membership-subscriptions/members/{{memberId}}" } },
+            { "name": "PATCH /api/membership-subscriptions/{subscriptionId}/status", "request": { "method": "PATCH", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{}" }, "url": "{{baseUrl}}/api/membership-subscriptions/{{subscriptionId}}/status" } }
+          ]
+        },
+        {
+          "name": "ClassController",
+          "item": [
+            { "name": "GET /api/classes", "request": { "method": "GET", "url": "{{baseUrl}}/api/classes" } },
+            { "name": "GET /api/classes/me", "request": { "method": "GET", "url": "{{baseUrl}}/api/classes/me" } },
+            { "name": "GET /api/classes/manage", "request": { "method": "GET", "url": "{{baseUrl}}/api/classes/manage" } },
+            { "name": "POST /api/classes", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{}" }, "url": "{{baseUrl}}/api/classes" } },
+            { "name": "PUT /api/classes/{id}", "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{}" }, "url": "{{baseUrl}}/api/classes/{{id}}" } },
+            { "name": "DELETE /api/classes/{id}", "request": { "method": "DELETE", "url": "{{baseUrl}}/api/classes/{{id}}" } }
+          ]
+        },
+        {
+          "name": "ClassBookingController",
+          "item": [
+            { "name": "GET /api/class-bookings/me", "request": { "method": "GET", "url": "{{baseUrl}}/api/class-bookings/me" } },
+            { "name": "PATCH /api/class-bookings/{bookingId}/status/cancel", "request": { "method": "PATCH", "url": "{{baseUrl}}/api/class-bookings/{{bookingId}}/status/cancel" } },
+            { "name": "GET /api/class-bookings/classes/{classId}", "request": { "method": "GET", "url": "{{baseUrl}}/api/class-bookings/classes/{{classId}}" } },
+            { "name": "PATCH /api/class-bookings/{bookingId}/attendance", "request": { "method": "PATCH", "url": "{{baseUrl}}/api/class-bookings/{{bookingId}}/attendance" } },
+            { "name": "GET /api/class-bookings/manage/classes/{classId}", "request": { "method": "GET", "url": "{{baseUrl}}/api/class-bookings/manage/classes/{{classId}}" } }
+          ]
+        },
+        {
+          "name": "CourseController",
+          "item": [
+            { "name": "GET /api/courses", "request": { "method": "GET", "url": "{{baseUrl}}/api/courses" } },
+            { "name": "GET /api/courses/categories/{categoryId}", "request": { "method": "GET", "url": "{{baseUrl}}/api/courses/categories/{{categoryId}}" } },
+            { "name": "POST /api/courses", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "multipart/form-data" }], "body": { "mode": "formdata", "formdata": [] }, "url": "{{baseUrl}}/api/courses" } },
+            { "name": "PUT /api/courses/{id}", "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "multipart/form-data" }], "body": { "mode": "formdata", "formdata": [] }, "url": "{{baseUrl}}/api/courses/{{id}}" } },
+            { "name": "PATCH /api/courses/{id}/deactivate", "request": { "method": "PATCH", "url": "{{baseUrl}}/api/courses/{{id}}/deactivate" } }
+          ]
+        },
+        {
+          "name": "CourseContentController",
+          "item": [
+            { "name": "GET /api/{courseId}/contents", "request": { "method": "GET", "url": "{{baseUrl}}/api/{{courseId}}/contents" } },
+            { "name": "POST /api/course-contents", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "multipart/form-data" }], "body": { "mode": "formdata", "formdata": [] }, "url": "{{baseUrl}}/api/course-contents" } },
+            { "name": "DELETE /api/course-contents/{id}", "request": { "method": "DELETE", "url": "{{baseUrl}}/api/course-contents/{{id}}" } }
+          ]
+        },
+        {
+          "name": "EnrollmentController",
+          "item": [
+            { "name": "GET /api/enrollments/me", "request": { "method": "GET", "url": "{{baseUrl}}/api/enrollments/me" } }
+          ]
+        },
+        {
+          "name": "OrderController",
+          "item": [
+            { "name": "POST /api/orders", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{}" }, "url": "{{baseUrl}}/api/orders" } },
+            { "name": "GET /api/orders", "request": { "method": "GET", "url": "{{baseUrl}}/api/orders" } },
+            { "name": "GET /api/orders/{orderId}/payments", "request": { "method": "GET", "url": "{{baseUrl}}/api/orders/{{orderId}}/payments" } },
+            { "name": "GET /api/orders/manage", "request": { "method": "GET", "url": "{{baseUrl}}/api/orders/manage" } },
+            { "name": "GET /api/orders/manage/{id}", "request": { "method": "GET", "url": "{{baseUrl}}/api/orders/manage/{{id}}" } },
+            { "name": "GET /api/orders/manage/payments", "request": { "method": "GET", "url": "{{baseUrl}}/api/orders/manage/payments" } },
+            { "name": "GET /api/orders/manage/{orderId}/payments", "request": { "method": "GET", "url": "{{baseUrl}}/api/orders/manage/{{orderId}}/payments" } }
+          ]
+        },
+        {
+          "name": "PaymentController",
+          "item": [
+            { "name": "POST /api/orders/{orderId}/payments", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{}" }, "url": "{{baseUrl}}/api/orders/{{orderId}}/payments" } }
+          ]
+        },
+        {
+          "name": "NotificationController",
+          "item": [
+            { "name": "POST /api/notifications", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{}" }, "url": "{{baseUrl}}/api/notifications" } },
+            { "name": "POST /api/notifications/broadcast", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{}" }, "url": "{{baseUrl}}/api/notifications/broadcast" } },
+            { "name": "GET /api/notifications/users/{userId}", "request": { "method": "GET", "url": "{{baseUrl}}/api/notifications/users/{{userId}}" } },
+            { "name": "PATCH /api/notifications/{notificationId}/read", "request": { "method": "PATCH", "url": "{{baseUrl}}/api/notifications/{{notificationId}}/read" } }
+          ]
+        },
+        {
+          "name": "WorkoutPlanController",
+          "item": [
+            { "name": "GET /api/workout-plans/manage", "request": { "method": "GET", "url": "{{baseUrl}}/api/workout-plans/manage" } },
+            { "name": "POST /api/workout-plans", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{}" }, "url": "{{baseUrl}}/api/workout-plans" } },
+            { "name": "PUT /api/workout-plans/{planId}", "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{}" }, "url": "{{baseUrl}}/api/workout-plans/{{planId}}" } },
+            { "name": "DELETE /api/workout-plans/{planId}", "request": { "method": "DELETE", "url": "{{baseUrl}}/api/workout-plans/{{planId}}" } },
+            { "name": "GET /api/workout-plans/trainers/{trainerUserId}", "request": { "method": "GET", "url": "{{baseUrl}}/api/workout-plans/trainers/{{trainerUserId}}" } },
+            { "name": "GET /api/workout-plans/members/{memberId}", "request": { "method": "GET", "url": "{{baseUrl}}/api/workout-plans/members/{{memberId}}" } }
+          ]
+        },
+        {
+          "name": "WorkoutScheduleController",
+          "item": [
+            { "name": "POST /api/workout-plans/{planId}/schedules", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{}" }, "url": "{{baseUrl}}/api/workout-plans/{{planId}}/schedules" } },
+            { "name": "PUT /api/workout-schedules/{id}", "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{}" }, "url": "{{baseUrl}}/api/workout-schedules/{{id}}" } },
+            { "name": "DELETE /api/workout-schedules/{id}", "request": { "method": "DELETE", "url": "{{baseUrl}}/api/workout-schedules/{{id}}" } },
+            { "name": "GET /api/workout-plans/{planId}/schedules", "request": { "method": "GET", "url": "{{baseUrl}}/api/workout-plans/{{planId}}/schedules" } }
+          ]
+        },
+        {
+          "name": "MemberWorkoutAssignController",
+          "item": [
+            { "name": "POST /api/workout-assignments", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{}" }, "url": "{{baseUrl}}/api/workout-assignments" } },
+            { "name": "PUT /api/workout-assignments/{id}", "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{}" }, "url": "{{baseUrl}}/api/workout-assignments/{{id}}" } },
+            { "name": "DELETE /api/workout-assignments/{id}", "request": { "method": "DELETE", "url": "{{baseUrl}}/api/workout-assignments/{{id}}" } },
+            { "name": "GET /api/workout-assignments/members/{memberId}", "request": { "method": "GET", "url": "{{baseUrl}}/api/workout-assignments/members/{{memberId}}" } }
+          ]
+        },
+        {
+          "name": "AttendanceController",
+          "item": [
+            { "name": "POST /api/attendance/check-ins", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{}" }, "url": "{{baseUrl}}/api/attendance/check-ins" } },
+            { "name": "PATCH /api/attendance/{id}/check-out", "request": { "method": "PATCH", "url": "{{baseUrl}}/api/attendance/{{id}}/check-out" } },
+            { "name": "GET /api/attendance/members/{memberId}", "request": { "method": "GET", "url": "{{baseUrl}}/api/attendance/members/{{memberId}}" } },
+            { "name": "GET /api/attendance", "request": { "method": "GET", "url": "{{baseUrl}}/api/attendance" } }
+          ]
+        },
+        {
+          "name": "AdminIncomeController",
+          "item": [
+            { "name": "GET /api/income/manage/summary", "request": { "method": "GET", "url": "{{baseUrl}}/api/income/manage/summary" } },
+            { "name": "GET /api/income/manage/by-type", "request": { "method": "GET", "url": "{{baseUrl}}/api/income/manage/by-type" } },
+            { "name": "GET /api/income/manage/daily", "request": { "method": "GET", "url": "{{baseUrl}}/api/income/manage/daily" } },
+            { "name": "GET /api/income/manage/monthly", "request": { "method": "GET", "url": "{{baseUrl}}/api/income/manage/monthly" } }
+          ]
+        },
+        {
+          "name": "FileController",
+          "item": [
+            { "name": "POST /api/files", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "multipart/form-data" }], "body": { "mode": "formdata", "formdata": [] }, "url": "{{baseUrl}}/api/files" } }
+          ]
+        }
+      ]
+    }
+  ]
+}
+

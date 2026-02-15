@@ -1,6 +1,7 @@
 package com.gymmanagement.gym_management.controllers;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,13 +15,14 @@ import com.gymmanagement.gym_management.services.CourseEnrollmentService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api/member/enrollments")
+@RequestMapping("/api/enrollments")
 @RequiredArgsConstructor
 public class EnrollmentController {
     private final CourseEnrollmentService enrollmentService;
     private final MemberRepo memberRepo;
 
-    @GetMapping
+    @GetMapping("/me")
+    @PreAuthorize("hasRole('MEMBER')")
     public ResponseEntity<?> getMyEnrollments(
             @AuthenticationPrincipal CustomUserDetails userDetails){
 

@@ -9,7 +9,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "member_workout_plan_assign")
+@Table(name = "member_workout_plan_assignments")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

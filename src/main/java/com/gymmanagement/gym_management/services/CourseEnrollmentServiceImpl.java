@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.gymmanagement.gym_management.entities.Course;
 import com.gymmanagement.gym_management.entities.CourseEnrollment;
 import com.gymmanagement.gym_management.entities.Member;
-import com.gymmanagement.gym_management.entities.Orders;
+import com.gymmanagement.gym_management.entities.Order;
 import com.gymmanagement.gym_management.enums.EnrollmentStatus;
 import com.gymmanagement.gym_management.repositories.CourseEnrollmentRepo;
 import com.gymmanagement.gym_management.repositories.CourseRepo;
@@ -26,7 +26,7 @@ public class CourseEnrollmentServiceImpl implements CourseEnrollmentService {
     private final CourseEnrollmentRepo enrollmentRepo;
 
     @Override
-    public void enrollCourse(Orders order){
+    public void enrollCourse(Order order){
 
         Member member = memberRepo
                 .findByUserId(order.getUser().getId())

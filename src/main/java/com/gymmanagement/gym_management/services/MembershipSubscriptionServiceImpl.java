@@ -11,7 +11,7 @@ import com.gymmanagement.gym_management.dtos.MembershipSubscriptionResponse;
 import com.gymmanagement.gym_management.entities.Member;
 import com.gymmanagement.gym_management.entities.MembershipPlan;
 import com.gymmanagement.gym_management.entities.MembershipSubscription;
-import com.gymmanagement.gym_management.entities.Orders;
+import com.gymmanagement.gym_management.entities.Order;
 import com.gymmanagement.gym_management.enums.SubscriptionStatus;
 import com.gymmanagement.gym_management.repositories.MemberRepo;
 import com.gymmanagement.gym_management.repositories.MembershipPlanRepo;
@@ -29,7 +29,7 @@ public class MembershipSubscriptionServiceImpl implements MembershipSubscription
     private final MembershipPlanRepo planRepo;
 
     @Override
-    public MembershipSubscriptionResponse subscribe(Orders order) {
+    public MembershipSubscriptionResponse subscribe(Order order) {
         Member member = memberRepo.findById(order.getUser().getId())
                 .orElseThrow(() -> new RuntimeException("Member not found"));
         MembershipPlan plan = planRepo.findById(order.getReferenceId())

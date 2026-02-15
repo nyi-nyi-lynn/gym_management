@@ -5,10 +5,9 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.gymmanagement.gym_management.entities.Orders;
+import com.gymmanagement.gym_management.entities.Order;
 
 @Repository
-public interface OrdersRepo  extends JpaRepository<Orders,Long>{
-        List<Orders> findByUserId(Long userId);
-
+public interface OrderRepo extends JpaRepository<Order, Long> {
+    List<Order> findByUserId(Long userId);
 }

@@ -16,14 +16,14 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "membership_subscription")
+@Table(name = "membership_subscriptions")
 public class MembershipSubscription {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    private Orders order;
+    private Order order;
 
     @ManyToOne
     private Member member;

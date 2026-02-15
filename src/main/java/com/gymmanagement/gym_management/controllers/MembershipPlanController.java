@@ -2,6 +2,7 @@ package com.gymmanagement.gym_management.controllers;
 
 import java.util.List;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import com.gymmanagement.gym_management.dtos.MembershipPlanRequest;
@@ -17,16 +18,16 @@ public class MembershipPlanController {
 
     private final MembershipPlanService service;
 
-    // ADMIN - CREATE
-    @PostMapping("/admin")
+    @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public MembershipPlanResponse create(
             @RequestBody MembershipPlanRequest req) {
         return service.create(req);
     }
 
 
-    // ADMIN - UPDATE
-    @PutMapping("/admin/{id}")
+    @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public MembershipPlanResponse update(
             @PathVariable Long id,
             @RequestBody MembershipPlanRequest req) {
@@ -34,14 +35,14 @@ public class MembershipPlanController {
     }
 
 
-    // ADMIN - DELETE
-    @DeleteMapping("/admin/{id}")
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public void delete(@PathVariable Long id) {
         service.delete(id);
     }
 
-    // ADMIN / MEMBER - GET ALL
     @GetMapping
+    @PreAuthorize("hasAnyRole('ADMIN','TRAINER','MEMBER')")
     public List<MembershipPlanResponse> getAll() {
         return service.getAll();
     }

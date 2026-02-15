@@ -16,7 +16,7 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "course_enrollment")
+@Table(name = "course_enrollments")
 @Data
 public class CourseEnrollment {
      @Id
@@ -25,7 +25,7 @@ public class CourseEnrollment {
 
     @ManyToOne
     @JoinColumn(name = "order_id")
-    private Orders order;
+    private Order order;
 
     @ManyToOne
     @JoinColumn(name = "course_id")
