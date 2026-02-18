@@ -1,0 +1,1834 @@
+{
+    "info":  {
+                 "_postman_id":  "6db2bb3d-7a9e-4dcf-a432-fdc7f2805542",
+                 "name":  "Gym Management API",
+                 "description":  "Complete Postman testing file from controllers. Structure: role -\u003e function.",
+                 "version":  {
+                                 "major":  1,
+                                 "minor":  4,
+                                 "patch":  1
+                             },
+                 "schema":  "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+             },
+    "variable":  [
+                     {
+                         "key":  "baseUrl",
+                         "value":  "http://localhost:8080"
+                     },
+                     {
+                         "key":  "token",
+                         "value":  ""
+                     },
+                     {
+                         "key":  "adminToken",
+                         "value":  ""
+                     },
+                     {
+                         "key":  "trainerToken",
+                         "value":  ""
+                     },
+                     {
+                         "key":  "memberToken",
+                         "value":  ""
+                     },
+                     {
+                         "key":  "adminEmail",
+                         "value":  "admin@gym.local"
+                     },
+                     {
+                         "key":  "trainerEmail",
+                         "value":  "trainer1@gym.local"
+                     },
+                     {
+                         "key":  "memberEmail",
+                         "value":  "member1@gym.local"
+                     },
+                     {
+                         "key":  "seedPassword",
+                         "value":  "password"
+                     },
+                     {
+                         "key":  "id",
+                         "value":  "1"
+                     },
+                     {
+                         "key":  "userId",
+                         "value":  "10"
+                     },
+                     {
+                         "key":  "memberId",
+                         "value":  "1"
+                     },
+                     {
+                         "key":  "trainerUserId",
+                         "value":  "2"
+                     },
+                     {
+                         "key":  "categoryId",
+                         "value":  "1"
+                     },
+                     {
+                         "key":  "courseId",
+                         "value":  "1"
+                     },
+                     {
+                         "key":  "classId",
+                         "value":  "1"
+                     },
+                     {
+                         "key":  "bookingId",
+                         "value":  "1"
+                     },
+                     {
+                         "key":  "orderId",
+                         "value":  "1"
+                     },
+                     {
+                         "key":  "planId",
+                         "value":  "1"
+                     },
+                     {
+                         "key":  "scheduleId",
+                         "value":  "1"
+                     },
+                     {
+                         "key":  "assignmentId",
+                         "value":  "1"
+                     },
+                     {
+                         "key":  "notificationId",
+                         "value":  "1"
+                     },
+                     {
+                         "key":  "subscriptionId",
+                         "value":  "1"
+                     },
+                     {
+                         "key":  "attendanceId",
+                         "value":  "1"
+                     }
+                 ],
+    "item":  [
+                 {
+                     "name":  "public",
+                     "auth":  {
+                                  "type":  "noauth"
+                              },
+                     "item":  [
+                                  {
+                                      "name":  "auth",
+                                      "item":  [
+                                                   {
+                                                       "name":  "Login Admin (Seed)",
+                                                       "request":  {
+                                                                       "method":  "POST",
+                                                                       "url":  "{{baseUrl}}/api/auth/login",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{\n  \"email\": \"{{adminEmail}}\",\n  \"password\": \"{{seedPassword}}\"\n}"
+                                                                                },
+                                                                       "auth":  {
+                                                                                    "type":  "noauth"
+                                                                                }
+                                                                   },
+                                                       "event":  {
+                                                                     "listen":  "test",
+                                                                     "script":  {
+                                                                                    "type":  "text/javascript",
+                                                                                    "exec":  [
+                                                                                                 "const token = pm.response.text().trim();",
+                                                                                                 "if (token) {",
+                                                                                                 "  pm.environment.set(\u0027adminToken\u0027, token);",
+                                                                                                 "  pm.environment.set(\u0027token\u0027, token);",
+                                                                                                 "}"
+                                                                                             ]
+                                                                                }
+                                                                 }
+                                                   },
+                                                   {
+                                                       "name":  "Login Trainer (Seed)",
+                                                       "request":  {
+                                                                       "method":  "POST",
+                                                                       "url":  "{{baseUrl}}/api/auth/login",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{\n  \"email\": \"{{trainerEmail}}\",\n  \"password\": \"{{seedPassword}}\"\n}"
+                                                                                },
+                                                                       "auth":  {
+                                                                                    "type":  "noauth"
+                                                                                }
+                                                                   },
+                                                       "event":  {
+                                                                     "listen":  "test",
+                                                                     "script":  {
+                                                                                    "type":  "text/javascript",
+                                                                                    "exec":  [
+                                                                                                 "const token = pm.response.text().trim();",
+                                                                                                 "if (token) {",
+                                                                                                 "  pm.environment.set(\u0027trainerToken\u0027, token);",
+                                                                                                 "  pm.environment.set(\u0027token\u0027, token);",
+                                                                                                 "}"
+                                                                                             ]
+                                                                                }
+                                                                 }
+                                                   },
+                                                   {
+                                                       "name":  "Login Member (Seed)",
+                                                       "request":  {
+                                                                       "method":  "POST",
+                                                                       "url":  "{{baseUrl}}/api/auth/login",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{\n  \"email\": \"{{memberEmail}}\",\n  \"password\": \"{{seedPassword}}\"\n}"
+                                                                                },
+                                                                       "auth":  {
+                                                                                    "type":  "noauth"
+                                                                                }
+                                                                   },
+                                                       "event":  {
+                                                                     "listen":  "test",
+                                                                     "script":  {
+                                                                                    "type":  "text/javascript",
+                                                                                    "exec":  [
+                                                                                                 "const token = pm.response.text().trim();",
+                                                                                                 "if (token) {",
+                                                                                                 "  pm.environment.set(\u0027memberToken\u0027, token);",
+                                                                                                 "  pm.environment.set(\u0027token\u0027, token);",
+                                                                                                 "}"
+                                                                                             ]
+                                                                                }
+                                                                 }
+                                                   },
+                                                   {
+                                                       "name":  "Register Member",
+                                                       "request":  {
+                                                                       "method":  "POST",
+                                                                       "url":  "{{baseUrl}}/api/auth/register/member",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{\n  \"name\": \"Postman Member\",\n  \"email\": \"postman.member@gym.local\",\n  \"password\": \"password\",\n  \"phoneNumber\": \"0911000111\",\n  \"address\": \"Yangon\",\n  \"gender\": \"MALE\",\n  \"dateOfBirth\": \"2001-01-01\"\n}"
+                                                                                }
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Register Trainer",
+                                                       "request":  {
+                                                                       "method":  "POST",
+                                                                       "url":  "{{baseUrl}}/api/auth/register/trainer",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{\n  \"name\": \"Postman Trainer\",\n  \"email\": \"postman.trainer@gym.local\",\n  \"password\": \"password\",\n  \"phoneNumber\": \"0911000222\",\n  \"address\": \"Mandalay\",\n  \"gender\": \"FEMALE\",\n  \"dateOfBirth\": \"1995-05-05\"\n}"
+                                                                                }
+                                                                   }
+                                                   }
+                                               ]
+                                  }
+                              ]
+                 },
+                 {
+                     "name":  "member",
+                     "auth":  {
+                                  "type":  "bearer",
+                                  "bearer":  [
+                                                 {
+                                                     "key":  "token",
+                                                     "value":  "{{memberToken}}",
+                                                     "type":  "string"
+                                                 }
+                                             ]
+                              },
+                     "item":  [
+                                  {
+                                      "name":  "members",
+                                      "item":  [
+                                                   {
+                                                       "name":  "Update",
+                                                       "request":  {
+                                                                       "method":  "PUT",
+                                                                       "url":  "{{baseUrl}}/api/members/me/profile",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{}"
+                                                                                }
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Get My Profile",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/members/me"
+                                                                   }
+                                                   }
+                                               ]
+                                  },
+                                  {
+                                      "name":  "categories",
+                                      "item":  [
+                                                   {
+                                                       "name":  "List",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/categories"
+                                                                   }
+                                                   }
+                                               ]
+                                  },
+                                  {
+                                      "name":  "membership-plans",
+                                      "item":  [
+                                                   {
+                                                       "name":  "List",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/membership-plans"
+                                                                   }
+                                                   }
+                                               ]
+                                  },
+                                  {
+                                      "name":  "membership-subscriptions",
+                                      "item":  [
+                                                   {
+                                                       "name":  "Get By Id",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/membership-subscriptions/members/{{memberId}}"
+                                                                   }
+                                                   }
+                                               ]
+                                  },
+                                  {
+                                      "name":  "classes",
+                                      "item":  [
+                                                   {
+                                                       "name":  "List",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/classes"
+                                                                   }
+                                                   }
+                                               ]
+                                  },
+                                  {
+                                      "name":  "class-bookings",
+                                      "item":  [
+                                                   {
+                                                       "name":  "Get My Profile",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/class-bookings/me"
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Cancel Booking",
+                                                       "request":  {
+                                                                       "method":  "PATCH",
+                                                                       "url":  "{{baseUrl}}/api/class-bookings/{{bookingId}}/status/cancel",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{}"
+                                                                                }
+                                                                   }
+                                                   }
+                                               ]
+                                  },
+                                  {
+                                      "name":  "courses",
+                                      "item":  [
+                                                   {
+                                                       "name":  "List",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/courses?page=0\u0026size=10"
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Get By Id",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/courses/categories/{{categoryId}}?page=0\u0026size=10"
+                                                                   }
+                                                   }
+                                               ]
+                                  },
+                                  {
+                                      "name":  "enrollments",
+                                      "item":  [
+                                                   {
+                                                       "name":  "Get My Profile",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/enrollments/me"
+                                                                   }
+                                                   }
+                                               ]
+                                  },
+                                  {
+                                      "name":  "orders",
+                                      "item":  [
+                                                   {
+                                                       "name":  "Create",
+                                                       "request":  {
+                                                                       "method":  "POST",
+                                                                       "url":  "{{baseUrl}}/api/orders",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{\n  \"orderType\": \"MEMBERSHIP\",\n  \"referenceId\": 1\n}"
+                                                                                }
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "List",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/orders"
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "List",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/orders/{{orderId}}/payments"
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Create Payment",
+                                                       "request":  {
+                                                                       "method":  "POST",
+                                                                       "url":  "{{baseUrl}}/api/orders/{{orderId}}/payments",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{\n  \"paymentMethod\": \"KBZPAY\",\n  \"transactionId\": \"TXN-POSTMAN-001\"\n}"
+                                                                                }
+                                                                   }
+                                                   }
+                                               ]
+                                  },
+                                  {
+                                      "name":  "notifications",
+                                      "item":  [
+                                                   {
+                                                       "name":  "Get By Id",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/notifications/users/{{userId}}"
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Patch",
+                                                       "request":  {
+                                                                       "method":  "PATCH",
+                                                                       "url":  "{{baseUrl}}/api/notifications/{{notificationId}}/read",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{}"
+                                                                                }
+                                                                   }
+                                                   }
+                                               ]
+                                  },
+                                  {
+                                      "name":  "workout-plans",
+                                      "item":  [
+                                                   {
+                                                       "name":  "Get By Id",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/workout-plans/members/{{memberId}}"
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "List",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/workout-plans/{{planId}}/schedules"
+                                                                   }
+                                                   }
+                                               ]
+                                  },
+                                  {
+                                      "name":  "workout-assignments",
+                                      "item":  [
+                                                   {
+                                                       "name":  "Get By Id",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/workout-assignments/members/{{memberId}}"
+                                                                   }
+                                                   }
+                                               ]
+                                  },
+                                  {
+                                      "name":  "attendance",
+                                      "item":  [
+                                                   {
+                                                       "name":  "Check In",
+                                                       "request":  {
+                                                                       "method":  "POST",
+                                                                       "url":  "{{baseUrl}}/api/attendance/check-ins",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{\n  \"memberId\": {{memberId}},\n  \"source\": \"MANUAL\"\n}"
+                                                                                }
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Check Out",
+                                                       "request":  {
+                                                                       "method":  "PATCH",
+                                                                       "url":  "{{baseUrl}}/api/attendance/{{id}}/check-out",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{}"
+                                                                                }
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Get By Id",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/attendance/members/{{memberId}}"
+                                                                   }
+                                                   }
+                                               ]
+                                  },
+                                  {
+                                      "name":  "files",
+                                      "item":  [
+                                                   {
+                                                       "name":  "Create",
+                                                       "request":  {
+                                                                       "method":  "POST",
+                                                                       "url":  "{{baseUrl}}/api/files",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{}"
+                                                                                }
+                                                                   }
+                                                   }
+                                               ]
+                                  },
+                                  {
+                                      "name":  "course-contents",
+                                      "item":  [
+                                                   {
+                                                       "name":  "List Course Contents By Course",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/{{courseId}}/contents"
+                                                                   }
+                                                   }
+                                               ]
+                                  }
+                              ]
+                 },
+                 {
+                     "name":  "trainer",
+                     "auth":  {
+                                  "type":  "bearer",
+                                  "bearer":  [
+                                                 {
+                                                     "key":  "token",
+                                                     "value":  "{{trainerToken}}",
+                                                     "type":  "string"
+                                                 }
+                                             ]
+                              },
+                     "item":  [
+                                  {
+                                      "name":  "trainers",
+                                      "item":  [
+                                                   {
+                                                       "name":  "Update",
+                                                       "request":  {
+                                                                       "method":  "PUT",
+                                                                       "url":  "{{baseUrl}}/api/trainers/me/profile",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{}"
+                                                                                }
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Get My Profile",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/trainers/me"
+                                                                   }
+                                                   }
+                                               ]
+                                  },
+                                  {
+                                      "name":  "categories",
+                                      "item":  [
+                                                   {
+                                                       "name":  "List",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/categories"
+                                                                   }
+                                                   }
+                                               ]
+                                  },
+                                  {
+                                      "name":  "membership-plans",
+                                      "item":  [
+                                                   {
+                                                       "name":  "List",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/membership-plans"
+                                                                   }
+                                                   }
+                                               ]
+                                  },
+                                  {
+                                      "name":  "classes",
+                                      "item":  [
+                                                   {
+                                                       "name":  "List",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/classes"
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Get My Profile",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/classes/me"
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Create",
+                                                       "request":  {
+                                                                       "method":  "POST",
+                                                                       "url":  "{{baseUrl}}/api/classes",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{}"
+                                                                                }
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Update",
+                                                       "request":  {
+                                                                       "method":  "PUT",
+                                                                       "url":  "{{baseUrl}}/api/classes/{{id}}",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{}"
+                                                                                }
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Delete",
+                                                       "request":  {
+                                                                       "method":  "DELETE",
+                                                                       "url":  "{{baseUrl}}/api/classes/{{id}}"
+                                                                   }
+                                                   }
+                                               ]
+                                  },
+                                  {
+                                      "name":  "class-bookings",
+                                      "item":  [
+                                                   {
+                                                       "name":  "Get By Id",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/class-bookings/classes/{{classId}}"
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Mark Attendance",
+                                                       "request":  {
+                                                                       "method":  "PATCH",
+                                                                       "url":  "{{baseUrl}}/api/class-bookings/{{bookingId}}/attendance",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{}"
+                                                                                }
+                                                                   }
+                                                   }
+                                               ]
+                                  },
+                                  {
+                                      "name":  "courses",
+                                      "item":  [
+                                                   {
+                                                       "name":  "List",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/courses?page=0\u0026size=10"
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Get By Id",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/courses/categories/{{categoryId}}?page=0\u0026size=10"
+                                                                   }
+                                                   }
+                                               ]
+                                  },
+                                  {
+                                      "name":  "notifications",
+                                      "item":  [
+                                                   {
+                                                       "name":  "Get By Id",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/notifications/users/{{userId}}"
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Patch",
+                                                       "request":  {
+                                                                       "method":  "PATCH",
+                                                                       "url":  "{{baseUrl}}/api/notifications/{{notificationId}}/read",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{}"
+                                                                                }
+                                                                   }
+                                                   }
+                                               ]
+                                  },
+                                  {
+                                      "name":  "workout-plans",
+                                      "item":  [
+                                                   {
+                                                       "name":  "Create",
+                                                       "request":  {
+                                                                       "method":  "POST",
+                                                                       "url":  "{{baseUrl}}/api/workout-plans",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{}"
+                                                                                }
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Update",
+                                                       "request":  {
+                                                                       "method":  "PUT",
+                                                                       "url":  "{{baseUrl}}/api/workout-plans/{{planId}}",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{}"
+                                                                                }
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Delete",
+                                                       "request":  {
+                                                                       "method":  "DELETE",
+                                                                       "url":  "{{baseUrl}}/api/workout-plans/{{planId}}"
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Get By Id",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/workout-plans/trainers/{{trainerUserId}}"
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Get By Id",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/workout-plans/members/{{memberId}}"
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Create",
+                                                       "request":  {
+                                                                       "method":  "POST",
+                                                                       "url":  "{{baseUrl}}/api/workout-plans/{{planId}}/schedules",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{}"
+                                                                                }
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Update",
+                                                       "request":  {
+                                                                       "method":  "PUT",
+                                                                       "url":  "{{baseUrl}}/api/workout-schedules/{{id}}",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{}"
+                                                                                }
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Delete",
+                                                       "request":  {
+                                                                       "method":  "DELETE",
+                                                                       "url":  "{{baseUrl}}/api/workout-schedules/{{id}}"
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "List",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/workout-plans/{{planId}}/schedules"
+                                                                   }
+                                                   }
+                                               ]
+                                  },
+                                  {
+                                      "name":  "workout-assignments",
+                                      "item":  [
+                                                   {
+                                                       "name":  "Create",
+                                                       "request":  {
+                                                                       "method":  "POST",
+                                                                       "url":  "{{baseUrl}}/api/workout-assignments",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{}"
+                                                                                }
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Update",
+                                                       "request":  {
+                                                                       "method":  "PUT",
+                                                                       "url":  "{{baseUrl}}/api/workout-assignments/{{id}}",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{}"
+                                                                                }
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Delete",
+                                                       "request":  {
+                                                                       "method":  "DELETE",
+                                                                       "url":  "{{baseUrl}}/api/workout-assignments/{{id}}"
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Get By Id",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/workout-assignments/members/{{memberId}}"
+                                                                   }
+                                                   }
+                                               ]
+                                  },
+                                  {
+                                      "name":  "attendance",
+                                      "item":  [
+                                                   {
+                                                       "name":  "Get By Id",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/attendance/members/{{memberId}}"
+                                                                   }
+                                                   }
+                                               ]
+                                  },
+                                  {
+                                      "name":  "files",
+                                      "item":  [
+                                                   {
+                                                       "name":  "Create",
+                                                       "request":  {
+                                                                       "method":  "POST",
+                                                                       "url":  "{{baseUrl}}/api/files",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{}"
+                                                                                }
+                                                                   }
+                                                   }
+                                               ]
+                                  },
+                                  {
+                                      "name":  "course-contents",
+                                      "item":  [
+                                                   {
+                                                       "name":  "List Course Contents By Course",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/{{courseId}}/contents"
+                                                                   }
+                                                   }
+                                               ]
+                                  }
+                              ]
+                 },
+                 {
+                     "name":  "admin",
+                     "auth":  {
+                                  "type":  "bearer",
+                                  "bearer":  [
+                                                 {
+                                                     "key":  "token",
+                                                     "value":  "{{adminToken}}",
+                                                     "type":  "string"
+                                                 }
+                                             ]
+                              },
+                     "item":  [
+                                  {
+                                      "name":  "users",
+                                      "item":  [
+                                                   {
+                                                       "name":  "Create",
+                                                       "request":  {
+                                                                       "method":  "POST",
+                                                                       "url":  "{{baseUrl}}/api/users",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{}"
+                                                                                }
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Update",
+                                                       "request":  {
+                                                                       "method":  "PUT",
+                                                                       "url":  "{{baseUrl}}/api/users/{{id}}",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{}"
+                                                                                }
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Get By Id",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/users/{{id}}"
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "List",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/users"
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Delete",
+                                                       "request":  {
+                                                                       "method":  "DELETE",
+                                                                       "url":  "{{baseUrl}}/api/users/{{id}}"
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Update",
+                                                       "request":  {
+                                                                       "method":  "PUT",
+                                                                       "url":  "{{baseUrl}}/api/users/{{id}}/activate",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{}"
+                                                                                }
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Update",
+                                                       "request":  {
+                                                                       "method":  "PUT",
+                                                                       "url":  "{{baseUrl}}/api/users/{{id}}/deactivate",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{}"
+                                                                                }
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Update",
+                                                       "request":  {
+                                                                       "method":  "PUT",
+                                                                       "url":  "{{baseUrl}}/api/users/{{id}}/suspended",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{}"
+                                                                                }
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Patch",
+                                                       "request":  {
+                                                                       "method":  "PATCH",
+                                                                       "url":  "{{baseUrl}}/api/users/{{id}}/status?status=active",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{}"
+                                                                                }
+                                                                   }
+                                                   }
+                                               ]
+                                  },
+                                  {
+                                      "name":  "categories",
+                                      "item":  [
+                                                   {
+                                                       "name":  "List",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/categories"
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "List (Manage)",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/categories/manage?keyword=\u0026status=ACTIVE\u0026page=0\u0026size=10"
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Create",
+                                                       "request":  {
+                                                                       "method":  "POST",
+                                                                       "url":  "{{baseUrl}}/api/categories",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{}"
+                                                                                }
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Update",
+                                                       "request":  {
+                                                                       "method":  "PUT",
+                                                                       "url":  "{{baseUrl}}/api/categories/{{id}}",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{}"
+                                                                                }
+                                                                   }
+                                                   }
+                                               ]
+                                  },
+                                  {
+                                      "name":  "membership-plans",
+                                      "item":  [
+                                                   {
+                                                       "name":  "Create",
+                                                       "request":  {
+                                                                       "method":  "POST",
+                                                                       "url":  "{{baseUrl}}/api/membership-plans",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{}"
+                                                                                }
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Update",
+                                                       "request":  {
+                                                                       "method":  "PUT",
+                                                                       "url":  "{{baseUrl}}/api/membership-plans/{{id}}",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{}"
+                                                                                }
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Delete",
+                                                       "request":  {
+                                                                       "method":  "DELETE",
+                                                                       "url":  "{{baseUrl}}/api/membership-plans/{{id}}"
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "List",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/membership-plans"
+                                                                   }
+                                                   }
+                                               ]
+                                  },
+                                  {
+                                      "name":  "membership-subscriptions",
+                                      "item":  [
+                                                   {
+                                                       "name":  "Get By Id",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/membership-subscriptions/members/{{memberId}}"
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Patch",
+                                                       "request":  {
+                                                                       "method":  "PATCH",
+                                                                       "url":  "{{baseUrl}}/api/membership-subscriptions/{{subscriptionId}}/status?status=ACTIVE",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{}"
+                                                                                }
+                                                                   }
+                                                   }
+                                               ]
+                                  },
+                                  {
+                                      "name":  "classes",
+                                      "item":  [
+                                                   {
+                                                       "name":  "List",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/classes"
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "List (Manage)",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/classes/manage"
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Create",
+                                                       "request":  {
+                                                                       "method":  "POST",
+                                                                       "url":  "{{baseUrl}}/api/classes",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{}"
+                                                                                }
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Update",
+                                                       "request":  {
+                                                                       "method":  "PUT",
+                                                                       "url":  "{{baseUrl}}/api/classes/{{id}}",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{}"
+                                                                                }
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Delete",
+                                                       "request":  {
+                                                                       "method":  "DELETE",
+                                                                       "url":  "{{baseUrl}}/api/classes/{{id}}"
+                                                                   }
+                                                   }
+                                               ]
+                                  },
+                                  {
+                                      "name":  "class-bookings",
+                                      "item":  [
+                                                   {
+                                                       "name":  "Get By Id",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/class-bookings/classes/{{classId}}"
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Mark Attendance",
+                                                       "request":  {
+                                                                       "method":  "PATCH",
+                                                                       "url":  "{{baseUrl}}/api/class-bookings/{{bookingId}}/attendance",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{}"
+                                                                                }
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "List (Manage)",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/class-bookings/manage/classes/{{classId}}"
+                                                                   }
+                                                   }
+                                               ]
+                                  },
+                                  {
+                                      "name":  "courses",
+                                      "item":  [
+                                                   {
+                                                       "name":  "List",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/courses?page=0\u0026size=10"
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Get By Id",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/courses/categories/{{categoryId}}?page=0\u0026size=10"
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Create",
+                                                       "request":  {
+                                                                       "method":  "POST",
+                                                                       "url":  "{{baseUrl}}/api/courses",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{}"
+                                                                                }
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Update",
+                                                       "request":  {
+                                                                       "method":  "PUT",
+                                                                       "url":  "{{baseUrl}}/api/courses/{{id}}",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{}"
+                                                                                }
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Patch",
+                                                       "request":  {
+                                                                       "method":  "PATCH",
+                                                                       "url":  "{{baseUrl}}/api/courses/{{id}}/deactivate",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{}"
+                                                                                }
+                                                                   }
+                                                   }
+                                               ]
+                                  },
+                                  {
+                                      "name":  "course-contents",
+                                      "item":  [
+                                                   {
+                                                       "name":  "Create",
+                                                       "request":  {
+                                                                       "method":  "POST",
+                                                                       "url":  "{{baseUrl}}/api/course-contents",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{}"
+                                                                                }
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Delete",
+                                                       "request":  {
+                                                                       "method":  "DELETE",
+                                                                       "url":  "{{baseUrl}}/api/course-contents/{{id}}"
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "List Course Contents By Course",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/{{courseId}}/contents"
+                                                                   }
+                                                   }
+                                               ]
+                                  },
+                                  {
+                                      "name":  "orders",
+                                      "item":  [
+                                                   {
+                                                       "name":  "List (Manage)",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/orders/manage"
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "List (Manage)",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/orders/manage/{{id}}"
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "List (Manage)",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/orders/manage/payments"
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "List (Manage)",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/orders/manage/{{orderId}}/payments"
+                                                                   }
+                                                   }
+                                               ]
+                                  },
+                                  {
+                                      "name":  "notifications",
+                                      "item":  [
+                                                   {
+                                                       "name":  "Create",
+                                                       "request":  {
+                                                                       "method":  "POST",
+                                                                       "url":  "{{baseUrl}}/api/notifications",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{}"
+                                                                                }
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Broadcast Notification",
+                                                       "request":  {
+                                                                       "method":  "POST",
+                                                                       "url":  "{{baseUrl}}/api/notifications/broadcast",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{}"
+                                                                                }
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Get By Id",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/notifications/users/{{userId}}"
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Patch",
+                                                       "request":  {
+                                                                       "method":  "PATCH",
+                                                                       "url":  "{{baseUrl}}/api/notifications/{{notificationId}}/read",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{}"
+                                                                                }
+                                                                   }
+                                                   }
+                                               ]
+                                  },
+                                  {
+                                      "name":  "workout-plans",
+                                      "item":  [
+                                                   {
+                                                       "name":  "List (Manage)",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/workout-plans/manage"
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Create",
+                                                       "request":  {
+                                                                       "method":  "POST",
+                                                                       "url":  "{{baseUrl}}/api/workout-plans",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{}"
+                                                                                }
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Update",
+                                                       "request":  {
+                                                                       "method":  "PUT",
+                                                                       "url":  "{{baseUrl}}/api/workout-plans/{{planId}}",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{}"
+                                                                                }
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Delete",
+                                                       "request":  {
+                                                                       "method":  "DELETE",
+                                                                       "url":  "{{baseUrl}}/api/workout-plans/{{planId}}"
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Get By Id",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/workout-plans/trainers/{{trainerUserId}}"
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Get By Id",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/workout-plans/members/{{memberId}}"
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Create",
+                                                       "request":  {
+                                                                       "method":  "POST",
+                                                                       "url":  "{{baseUrl}}/api/workout-plans/{{planId}}/schedules",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{}"
+                                                                                }
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Update",
+                                                       "request":  {
+                                                                       "method":  "PUT",
+                                                                       "url":  "{{baseUrl}}/api/workout-schedules/{{id}}",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{}"
+                                                                                }
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Delete",
+                                                       "request":  {
+                                                                       "method":  "DELETE",
+                                                                       "url":  "{{baseUrl}}/api/workout-schedules/{{id}}"
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "List",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/workout-plans/{{planId}}/schedules"
+                                                                   }
+                                                   }
+                                               ]
+                                  },
+                                  {
+                                      "name":  "workout-assignments",
+                                      "item":  [
+                                                   {
+                                                       "name":  "Create",
+                                                       "request":  {
+                                                                       "method":  "POST",
+                                                                       "url":  "{{baseUrl}}/api/workout-assignments",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{}"
+                                                                                }
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Update",
+                                                       "request":  {
+                                                                       "method":  "PUT",
+                                                                       "url":  "{{baseUrl}}/api/workout-assignments/{{id}}",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{}"
+                                                                                }
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Delete",
+                                                       "request":  {
+                                                                       "method":  "DELETE",
+                                                                       "url":  "{{baseUrl}}/api/workout-assignments/{{id}}"
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Get By Id",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/workout-assignments/members/{{memberId}}"
+                                                                   }
+                                                   }
+                                               ]
+                                  },
+                                  {
+                                      "name":  "attendance",
+                                      "item":  [
+                                                   {
+                                                       "name":  "Get By Id",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/attendance/members/{{memberId}}"
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "List",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/attendance"
+                                                                   }
+                                                   }
+                                               ]
+                                  },
+                                  {
+                                      "name":  "income",
+                                      "item":  [
+                                                   {
+                                                       "name":  "List (Manage)",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/income/manage/summary?from=2026-01-01\u0026to=2026-12-31"
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "List (Manage)",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/income/manage/by-type?from=2026-01-01\u0026to=2026-12-31"
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "List (Manage)",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/income/manage/daily?from=2026-01-01\u0026to=2026-12-31"
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "List (Manage)",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{baseUrl}}/api/income/manage/monthly?from=2026-01-01\u0026to=2026-12-31"
+                                                                   }
+                                                   }
+                                               ]
+                                  },
+                                  {
+                                      "name":  "files",
+                                      "item":  [
+                                                   {
+                                                       "name":  "Create",
+                                                       "request":  {
+                                                                       "method":  "POST",
+                                                                       "url":  "{{baseUrl}}/api/files",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{}"
+                                                                                }
+                                                                   }
+                                                   }
+                                               ]
+                                  }
+                              ]
+                 }
+             ]
+}

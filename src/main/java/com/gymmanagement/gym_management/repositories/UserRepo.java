@@ -10,4 +10,5 @@ import com.gymmanagement.gym_management.entities.User;
 @Repository
 public interface UserRepo extends JpaRepository<User,Long>{
     Optional<User> findByEmail(String email);
+
 }

@@ -2,38 +2,48 @@ package com.gymmanagement.gym_management.controllers;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
-import com.gymmanagement.gym_management.dtos.MembershipPlanRequestDTO;
-import com.gymmanagement.gym_management.dtos.MembershipPlanResponseDTO;
+import com.gymmanagement.gym_management.dtos.MembershipPlanRequest;
+import com.gymmanagement.gym_management.dtos.MembershipPlanResponse;
 import com.gymmanagement.gym_management.services.MembershipPlanService;
 
-import jakarta.validation.Valid;
-
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-
+import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api/plans")
+@RequestMapping("/api/membership-plans")
+@RequiredArgsConstructor
 public class MembershipPlanController {
-    @Autowired
-    private MembershipPlanService service;
+
+    private final MembershipPlanService service;
 
     @PostMapping
-    public MembershipPlanResponseDTO createPlan(@Valid @RequestBody MembershipPlanRequestDTO dto) {
-        return service.createPlan(dto);
+    @PreAuthorize("hasRole('ADMIN')")
+    public MembershipPlanResponse create(
+            @RequestBody MembershipPlanRequest req) {
+        return service.create(req);
+    }
+
+
+    @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public MembershipPlanResponse update(
+            @PathVariable Long id,
+            @RequestBody MembershipPlanRequest req) {
+        return service.update(id, req);
+    }
+
+
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public void delete(@PathVariable Long id) {
+        service.delete(id);
     }
 
     @GetMapping
-    public List<MembershipPlanResponseDTO> getAllPlan() {
-        return service.getAllPlans();
+    @PreAuthorize("hasAnyRole('ADMIN','TRAINER','MEMBER')")
+    public List<MembershipPlanResponse> getAll() {
+        return service.getAll();
     }
-    
-    
 }
